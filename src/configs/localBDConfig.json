@@ -1,0 +1,11 @@
+{
+  "tables": {
+    "tasks": {},
+    "staff": {
+      "staff_id": "int",
+      "staff_name": "string",
+      "staff_skills": "string",
+      "staff_avatar": "string"
+    }
+  }
+}
