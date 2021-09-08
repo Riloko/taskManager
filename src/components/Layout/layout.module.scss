@@ -1,0 +1,8 @@
+.layout {
+    background: #000;
+    &_logo {
+        width: 120px;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
