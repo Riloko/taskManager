@@ -2,12 +2,12 @@ import { Layout, Breadcrumb } from 'antd';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { layout_logo } from './layout.module.scss';
+import { layout } from './layout.module.scss';
 import MenuConfig from './config/menuConfig';
 
 import { renderMenu, createBreadcrupmbs } from './helpers/renderFunctions';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 
 const LayoutCustom = ({ children }) => {
@@ -29,15 +29,13 @@ const LayoutCustom = ({ children }) => {
         setCollapsed(collapsed);
     };
 
-    
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className={layout_logo} />
           {renderMenu(MenuConfig)}
         </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
+        <Layout className={layout}>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ padding: '16px 0' }}>
               {breadcrumbs ? breadcrumbs.map(item => item) : null}
@@ -46,7 +44,7 @@ const LayoutCustom = ({ children }) => {
               { children ? children : 'Bill is a cat.' }
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Упорядочиватель задач битрикса и своих дел</Footer>
+          <Footer className={layout} style={{ textAlign: 'center' }}>Упорядочиватель задач битрикса и своих дел</Footer>
         </Layout>
       </Layout>
     );

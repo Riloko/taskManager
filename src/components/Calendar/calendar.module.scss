@@ -1,5 +1,5 @@
 .calendar {
-    max-width: 700px;
+    width: 100%;
     &_header {
         margin-bottom: 35px;
         &_controls {
@@ -9,54 +9,76 @@
         }
     }
     &_body {
+        width: 100%;
+        &_table {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            &_row {
+                width: 100%;
+                display: flex;
+            }
+        }
         &_daysOfWeek {
+            display: flex;
+            justify-content: space-between;
             &_item {
+                width: 100%;
                 text-align: center;
                 font-weight: 500;
-                font-size: 17px;
+                font-size: 18px;
+                line-height: 22px;
+                padding-bottom: 33px;
             }
         }
         &_button {
-            height: 100px;
-            width: 100px;
-            text-align: center;
-            border: 1px solid #000;
-            background: #fff;
+            height: 120px;
+            width: calc(100% / 7);
+            border: 0.8px solid #E6E6E6;
             cursor: pointer;
-            color: #000;
+            color: #080808;
             font-weight: 500;
-            font-size: 17px;
-            transition: .3s;
-            &:hover {
-                background: #00ff19;
-                opacity: 1;
-            }
+            font-size: 24px;
+            line-height: 29px;
+            letter-spacing: -0.02em;
             &__inner {
-
+                height: 100%;
+                width: 100%;
+                padding: 9px 16px;
+                background: #FAFAFA;
+                transition: .3s;
+                &:hover {
+                    background: rgba(255, 96, 96, 0.2);
+                    opacity: 1;
+                }
+                &_header {
+                    display: flex;
+                }
             }
         }
         &_button_lastMonth,
         &_button_nextMonth{
-            background: rgb(100, 100, 108);
-            color: #fff;
-            opacity: 0.3;
             &  .calendar_body_button__inner {
-
+                opacity: 0.3;
+                &:hover {
+                    background: rgba(255, 96, 96, 0.2);
+                }
             }
         }
         &_button_isWeekend{
-            background: rgb(210, 137, 177);
-            color: #fff;
-            opacity: 0.6;
             &  .calendar_body_button__inner {
-
+                background: linear-gradient(180deg, rgba(253, 182, 93, 0.2) 0%, rgba(234, 157, 60, 0.2) 100%);
+                &:hover {
+                    background: rgba(255, 96, 96, 0.2);
+                }
             }
         }
         &_button_today {
-            background: rgb(67, 57, 177);
-            color: #fff;
             &  .calendar_body_button__inner {
-
+                background: rgb(67, 57, 177);
+                &:hover {
+                    background: rgba(255, 96, 96, 0.2);
+                }
             }
         }
     }

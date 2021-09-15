@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import moment from 'moment';
 
 import {
     calendar_body_button,
@@ -8,6 +7,7 @@ import {
     calendar_body_button_nextMonth,
     calendar_body_button_isWeekend,
     calendar_body_button__inner,
+    calendar_body_button__inner_header,
 } from '../calendar.module.scss';
 
 const CalendarButton = ({ day: { data, today, isWeekend, isPrevMonth, isNextMonth } }) => {
@@ -16,7 +16,7 @@ const CalendarButton = ({ day: { data, today, isWeekend, isPrevMonth, isNextMont
     }
 
     return (
-        <td
+        <div
         onClick={onClick}
         className={classNames ({
             [calendar_body_button]: true,
@@ -26,12 +26,12 @@ const CalendarButton = ({ day: { data, today, isWeekend, isPrevMonth, isNextMont
             [calendar_body_button_nextMonth]: isNextMonth
         })}
         >
-            <span
-                className={calendar_body_button__inner}
-            >
-                {data ? data.get('date') : ""}
-            </span>
-        </td>
+            <div className={calendar_body_button__inner}>
+                <div className={calendar_body_button__inner_header}>
+                    <span>{data ? data.get('date') : ""}</span>
+                </div>
+            </div>
+        </div>
     )
 }
 

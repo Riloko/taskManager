@@ -1,27 +1,26 @@
 import {useState, useEffect} from "react";
-import moment from "moment";
 
 import Calendar from "../../components/Calendar";
+import { TasksDashboard } from "./components";
 
+import {tasks, tasks_calendar, tasks_dashboard} from './tasks.module.scss';
 
 const Tasks = () => {
 
     const [currentEventsRange, setCurrentEventRange] = useState(null)
 
-    const getCurrentDate = date => {
-        const startDay = date.clone().set('date', 1);
-        const lastDay = date.clone().set('date', 1).add(1, 'month').subtract(1, 'days');
-
-        setCurrentEventRange({ startDay, lastDay });
+    const getCurrentDate = range => {
+        setCurrentEventRange(range);
     }
 
-    useEffect(() => {
-        getCurrentDate(moment());
-    }, [])
-
     return (
-       <div>
-           <Calendar getDate={getCurrentDate}/>
+       <div className={tasks}>
+           <div className={tasks_calendar}>
+               <Calendar getDate={getCurrentDate}/>
+           </div>
+           <div className={tasks_dashboard}>
+               <TasksDashboard />
+           </div>
        </div>
     )
 }

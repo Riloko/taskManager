@@ -9,6 +9,9 @@ import CalendarButton from "./components/calendarButton";
 import {
     calendar,
     calendar_body,
+    calendar_body_table,
+    calendar_body_table_row,
+    calendar_body_daysOfWeek,
     calendar_body_daysOfWeek_item,
     calendar_header,
     calendar_header_controls
@@ -17,7 +20,7 @@ import {
 const Calendar = ({ getDate }) => {
     const [currentDate, setCurrentDate] = useState(moment().set('date', 1));
     const [daysOfMonth, setDaysOfMonth] = useState(null);
-    const [daysOfTheWeek] = useState(['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']);
+    const [daysOfTheWeek] = useState(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']);
 
     const uuid = () => {
         return (
@@ -47,6 +50,8 @@ const Calendar = ({ getDate }) => {
         // Если месяц не заканчивался в воскресенье, конец - следующее воскресенье следующего месяца
         lastDay.set('date', lastDay.get('date') + (6 - endDow));
 
+        getDate({ lastDay: lastDay.clone(), startDay: startDay.clone() });
+
         while (startDay <= lastDay) {
             calendarMatrix.push({
                 uuid: uuid(),
@@ -75,7 +80,7 @@ const Calendar = ({ getDate }) => {
     const changeMonth = newDate => {
         setCurrentDate(newDate);
         setDaysOfMonth(getCalendarMatrix(newDate))
-        getDate(newDate);
+
     };
 
     const renderCalendar = () => {
@@ -94,8 +99,9 @@ const Calendar = ({ getDate }) => {
     }
 
     useEffect(() => {
+        // eslint-disable-next-line
         setDaysOfMonth(getCalendarMatrix(currentDate));
-    }, [])
+    }, [currentDate])
 
     return (
         <div className={calendar}>
@@ -107,22 +113,22 @@ const Calendar = ({ getDate }) => {
                 </div>
             </div>
             <div className={calendar_body}>
-                <table >
-                    <tbody>
-                    <tr>{ daysOfTheWeek.map(day => <td className={calendar_body_daysOfWeek_item} key={day}>{day}</td>) }</tr>
+                <div className={calendar_body_daysOfWeek}>
+                    { daysOfTheWeek.map(day => <div className={calendar_body_daysOfWeek_item} key={day}>{day}</div>) }
+                </div>
+                <div className={calendar_body_table}>
                     {
                         renderCalendar().map((row, index) => {
                             return (
-                                <tr key={index}>
+                                <div className={calendar_body_table_row} key={index}>
                                     {
                                         row.map(day => <CalendarButton key={day.uuid} day={day} />)
                                     }
-                                </tr>
+                                </div>
                             )
                         })
                     }
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     )

@@ -1,0 +1,12 @@
+.tasks {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &_calendar {
+    width: 65%;
+  }
+
+  &_dashboard {
+    width: 32%;
+  }
+}

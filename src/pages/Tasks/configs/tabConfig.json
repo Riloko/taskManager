@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Работа",
+    "type": "work"
+  },
+  {
+    "name": "Личное",
+    "type": "person"
+  },
+  {
+  "name": "Встречи",
+  "type": "meetings"
+  },
+  {
+    "name": "Созвоны",
+    "type": "calls"
+  },
+  {
+    "name": "Нераспределенное",
+    "type": "unrevised"
+  }
+]
