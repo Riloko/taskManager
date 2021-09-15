@@ -3,6 +3,7 @@ import {BrowserRouter} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import 'antd/dist/antd.css';
+import 'moment/locale/ru';
 
 ReactDOM.render(
   <BrowserRouter>

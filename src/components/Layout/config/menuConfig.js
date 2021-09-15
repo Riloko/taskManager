@@ -9,16 +9,16 @@ import { STAFF, TASKS } from '../../../configs/routerConfig';
 
 const MenuConfig = [
     {
-        Icon: UserOutlined,
-        label: 'Сотрудники',
-        link: STAFF,
-        key: 'staff'
-    },
-    {
         Icon: ScheduleOutlined,
         label: 'Мои задачи',
         link: TASKS,
         key: 'tasks'
+    },
+    {
+        Icon: UserOutlined,
+        label: 'Сотрудники',
+        link: STAFF,
+        key: 'staff'
     }
 ];
 

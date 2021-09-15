@@ -1,0 +1,63 @@
+.calendar {
+    max-width: 700px;
+    &_header {
+        margin-bottom: 35px;
+        &_controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &_body {
+        &_daysOfWeek {
+            &_item {
+                text-align: center;
+                font-weight: 500;
+                font-size: 17px;
+            }
+        }
+        &_button {
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            border: 1px solid #000;
+            background: #fff;
+            cursor: pointer;
+            color: #000;
+            font-weight: 500;
+            font-size: 17px;
+            transition: .3s;
+            &:hover {
+                background: #00ff19;
+                opacity: 1;
+            }
+            &__inner {
+
+            }
+        }
+        &_button_lastMonth,
+        &_button_nextMonth{
+            background: rgb(100, 100, 108);
+            color: #fff;
+            opacity: 0.3;
+            &  .calendar_body_button__inner {
+
+            }
+        }
+        &_button_isWeekend{
+            background: rgb(210, 137, 177);
+            color: #fff;
+            opacity: 0.6;
+            &  .calendar_body_button__inner {
+
+            }
+        }
+        &_button_today {
+            background: rgb(67, 57, 177);
+            color: #fff;
+            &  .calendar_body_button__inner {
+
+            }
+        }
+    }
+}

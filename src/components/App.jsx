@@ -6,9 +6,8 @@ import {
 
 import LayoutCustom from "./Layout";
 
-import Staff from "../pages/Staff";
-
-import { STAFF } from "../configs/routerConfig";
+import { Tasks, Staff } from "../pages";
+import { STAFF, TASKS } from "../configs/routerConfig";
 
 
 
@@ -16,9 +15,10 @@ const App = () => {
   return (
     <LayoutCustom>
       <Switch>
+        <Route path={TASKS} component={Tasks} exact/>
         <Route path={STAFF} component={Staff} exact/>
 
-        <Redirect to={STAFF}/>
+        <Redirect to={TASKS}/>
       </Switch>
     </LayoutCustom>
   );

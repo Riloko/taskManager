@@ -8,7 +8,7 @@ import { StaffItem } from './components';
 
 const Staff = () => {
 
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
     let userData = {};
     const translateFields = {
