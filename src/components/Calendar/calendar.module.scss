@@ -22,6 +22,7 @@
         &_daysOfWeek {
             display: flex;
             justify-content: space-between;
+            border-bottom: 0.8px solid #E6E6E6;
             &_item {
                 width: 100%;
                 text-align: center;
@@ -34,13 +35,17 @@
         &_button {
             height: 120px;
             width: calc(100% / 7);
-            border: 0.8px solid #E6E6E6;
+            border-left: 0.8px solid #E6E6E6;
+            border-bottom: 0.8px solid #E6E6E6;
             cursor: pointer;
             color: #080808;
             font-weight: 500;
             font-size: 24px;
             line-height: 29px;
             letter-spacing: -0.02em;
+            &:nth-child(7n) {
+                border-right: 0.8px solid #E6E6E6;
+            }
             &__inner {
                 height: 100%;
                 width: 100%;
