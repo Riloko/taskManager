@@ -1,0 +1,13 @@
+{
+  "sendButton": {
+    "text": "Создать дело",
+    "primary": true
+  },
+  "cancelButton": {
+    "text": "Отмена",
+    "primary": false
+  },
+  "title": {
+    "text": "Создать новое дело"
+  }
+}

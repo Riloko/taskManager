@@ -10,11 +10,10 @@ import {
   component_input_inner_errorMessage
 } from './dynamicComponents.module.scss';
 
-const DynamicInput = ({ onInputChange = () => {}, name, type = 'string', required = false, label, width = '100%' }) => {
+const DynamicInput = ({ onCleanError, onInputChange = () => {}, name, type = 'string', required = false, label, width = '100%', error }) => {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState('');
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(' ');
+  const [errorMessage] = useState('Это поле обязательно к заполению!');
 
   const onInput = event => {
     const {value} = event.target;
@@ -27,6 +26,7 @@ const DynamicInput = ({ onInputChange = () => {}, name, type = 'string', require
     }
     setValue(value);
     onInputChange(value);
+    error && onCleanError(name);
   };
 
   return (
@@ -47,7 +47,7 @@ const DynamicInput = ({ onInputChange = () => {}, name, type = 'string', require
           onBlur={() => setActive(false)}
           onInput={onInput}
         />
-        { errorMessage && <p className={component_input_inner_errorMessage}>{errorMessage}</p>}
+        { error && <p className={component_input_inner_errorMessage}>{errorMessage}</p>}
       </div>
     </div>
   )

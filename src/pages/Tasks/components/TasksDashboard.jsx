@@ -6,6 +6,7 @@ import DynamicForm from "../../../components/DynamicForm";
 
 import tabConfig from '../configs/tabConfig.json';
 import inputs from '../configs/inputs.json';
+import formConfig from '../configs/formConfig.json';
 
 import { tasks_dashboard_header } from '../tasks.module.scss';
 
@@ -25,7 +26,7 @@ const TasksDashboard = ({ dateRange }) => {
 			<div className={tasks_dashboard_header}>
 				<Button icon={<PlusCircleOutlined />} type="primary" danger>Добавить новое дело</Button>
 				<div style={{width: '100%', height: "500px", border: "1px solid #000"}}>
-					<DynamicForm config={inputs}/>
+					<DynamicForm config={inputs} formConfig={formConfig} />
 				</div>
 			</div>
 			<div>
