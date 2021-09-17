@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 import Calendar from "../../components/Calendar";
 import { TasksDashboard } from "./components";
@@ -19,7 +19,7 @@ const Tasks = () => {
                <Calendar getDate={getCurrentDate}/>
            </div>
            <div className={tasks_dashboard}>
-               <TasksDashboard />
+               <TasksDashboard dateRange={currentEventsRange}/>
            </div>
        </div>
     )

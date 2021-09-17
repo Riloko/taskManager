@@ -1,0 +1,20 @@
+.form {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  &_header {
+    height: 60px;
+    width: 100%;
+  }
+  &_body {
+    height: calc(100% - 120px);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &_footer {
+    height: 60px;
+    width: 100%;
+  }
+}

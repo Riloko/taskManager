@@ -41,7 +41,6 @@ const StaffItem = ({ staff_id, staff_name, staff_skills, staff_avatar, config: {
 				</Row>
 				<Row style={{ marginBottom: 15 }}>
 					<Col span={24}>{staff_skills}</Col>
-					{staff_id}
 				</Row>
 				<Row>
 					<Col span={13}>

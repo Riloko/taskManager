@@ -1,0 +1,53 @@
+.component {
+
+  &_input {
+    max-height: 79px;
+    &_label {
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &_inner {
+      display: block;
+      & input {
+        width: 100%;
+        padding: 16px 36px 16px 12px;
+        outline: none;
+        background: #FFFFFF;
+        border: 1px solid #949494;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+      &_errorMessage {
+        padding-top: 6px;
+        margin-bottom: 0;
+        font-size: 11px;
+        line-height: 13px;
+      }
+    }
+  }
+  &_input_active {
+    & .component_input_label {
+      color: #543FD3;
+    }
+    & .component_input_inner {
+      & input {
+        border: 1px solid #543FD3;
+      }
+    }
+  }
+  &_input_error {
+    & .component_input_label {
+      color: #EE0004;
+    }
+    & .component_input_inner {
+      & input {
+        color: #EE0004;
+        border: 1px solid #EE0004;
+      }
+      &_errorMessage {
+        color: #EE0004;
+      }
+    }
+  }
+}
