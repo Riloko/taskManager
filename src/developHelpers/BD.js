@@ -4,28 +4,7 @@ import { generateUUID } from "../utils";
 
 const state = {
 	staff: getData('staff') ? getData('staff') : [],
-	types: getData('types') ? getData('types') : [
-		{
-			types_id: "7cabec83-af50-5015-b6c9-2c806d04c39c",
-			types_name: "Работа"
-		},
-		{
-			types_id: "146bc2c9-c5db-54cf-84f4-dfb9aec06477",
-			types_name: "Личное"
-		},
-		{
-			types_id: "964325c8-0da5-528b-b63b-2f69a6828d2c",
-			types_name: "Встречи"
-		},
-		{
-			types_id: "e5575ac6-3a56-52b5-bff9-b8da975cd236",
-			types_name: "Созвоны"
-		},
-		{
-			types_id: "7c8c7361-a363-5b91-9be4-e2c674bafbb6",
-			types_name: "Нераспределенное"
-		}
-	],
+	types: getData('types') ? getData('types') : [],
 	tasks: getData('tasks') ? getData('tasks') : [],
 	states: getData('states') ? getData('states') : [
 		{
@@ -157,6 +136,30 @@ const state = {
 	list_items: getData('list_items') ? getData('list_items') : [],
 };
 
+const getters = {
+	"GET_TASKS": function (types_id) {
+		const filteredTasks = types_id ? state['tasks'].filter(({ task_type }) => task_type === types_id) : state['tasks'];
+		return filteredTasks.map(task => {
+			const type = state['types'].find(type => task.task_type === type.types_id);
+
+			return { ...task,
+				task_type: type ? {...type, types_color: state['color'].find(color => type.types_color === color.color_id), types_icon: state['icon'].find(icon => type.types_icon === icon.icon_id)} : undefined,
+				task_staff: state['staff'].find(staff => task.task_staff === staff.staff_id),
+				task_state: state['states'].find(state => task.task_state === state.state_id)
+			}
+		})
+	},
+	"GET_TYPES": function () {
+		return state['types'].map(type => {
+			return {
+				...type,
+				types_color: state['color'].find(color => type.types_color === color.color_id),
+				types_icon: state['icon'].find(icon => type.types_icon === icon.icon_id)
+			}
+		})
+	}
+};
+
 const actions = {
 	"REMOVE_STAFF": function (id) {
 		const stateWithRemove = state.staff.filter(({ staff_id }) => staff_id !== id);
@@ -178,12 +181,17 @@ const actions = {
 		setData('staff', state.staff);
 	},
 	"ADD_TASK": function (taskData) {
-		state.tasks.push({...taskData, "task_id": generateUUID()});
+		state.tasks.push({...taskData, "task_id": generateUUID(), "task_state": state.states[0].state_id});
 		setData('tasks', state.tasks);
+	},
+	"ADD_TYPE": function (typeData) {
+		state.types.push({...typeData, "types_id": generateUUID()});
+		setData('types', state.types);
 	}
 };
 
 export {
 	state,
+	getters,
 	actions
 };

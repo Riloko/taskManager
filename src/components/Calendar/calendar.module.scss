@@ -4,8 +4,11 @@
         margin-bottom: 35px;
         &_controls {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
+            & button:first-child {
+                margin-right: 10px;
+            }
         }
     }
     &_body {

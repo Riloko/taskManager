@@ -16,7 +16,7 @@ import {
   form_footer
 } from './dynamicForm.module.scss';
 
-const DynamicForm = ({ config, formConfig: {sendButton, cancelButton, title} = {} , modalToggleFunction}) => {
+const DynamicForm = ({ config, formConfig: {sendButton, cancelButton, title} = {} , modalToggleFunction, actionHandler}) => {
 
   const DynamicComponents = {
     input: (name, required, type, label, width, error, fieldType) => <DynamicInput onCleanError={removeError} { ...{ name, required, type, onInputChange, label, width, error, fieldType } } key={name} />,
@@ -50,7 +50,7 @@ const DynamicForm = ({ config, formConfig: {sendButton, cancelButton, title} = {
       setErrorData(errors);
       if (!valid) return;
 
-      actions.ADD_TASK(data);
+      actionHandler(data);
       modalToggleFunction && modalToggleFunction(false);
   };
 

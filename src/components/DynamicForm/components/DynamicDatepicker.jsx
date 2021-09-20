@@ -20,8 +20,8 @@ const DynamicDatepicker = ({ onCleanError, onInputChange = () => {}, name, type 
   const [errorMessage] = useState('Это поле обязательно к заполению!');
 
   const onDatepickerChange = (date, dateFormat) => {
-    setValue(dateFormat);
-    onInputChange(dateFormat, name);
+    setValue(date);
+    onInputChange(date ? date._d : null, name);
     error && onCleanError(name);
   }
 

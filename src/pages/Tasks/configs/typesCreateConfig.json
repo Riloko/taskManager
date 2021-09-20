@@ -2,7 +2,7 @@
   {
     "component": "input",
     "label": "Название",
-    "name": "type_name",
+    "name": "types_name",
     "required": true,
     "type": "string",
     "width": "100%",
@@ -11,7 +11,7 @@
   {
     "component": "select",
     "label": "Цвет дела",
-    "name": "type_color",
+    "name": "types_color",
     "required": true,
     "type": "string",
     "width": "100%",
@@ -20,7 +20,7 @@
   {
     "component": "select",
     "label": "Иконка",
-    "name": "type_icon",
+    "name": "types_icon",
     "required": false,
     "type": "string",
     "width": "100%",

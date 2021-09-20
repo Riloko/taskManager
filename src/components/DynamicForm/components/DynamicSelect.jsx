@@ -20,7 +20,7 @@ const {Option} = Select;
 const DynamicSelect = ({ onCleanError, onInputChange = () => {}, name, type = 'string', required = false, label, width = '100%', error, entity }) => {
 
   const [active, setActive] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(undefined);
   const [errorMessage] = useState('Это поле обязательно к заполению!');
 
   const onSelectChange = value => {

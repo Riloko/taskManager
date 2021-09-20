@@ -2,6 +2,8 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { Button } from 'antd';
 
+import { getters } from "../../developHelpers/BD";
+
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import CalendarButton from "./components/calendarButton";
@@ -17,7 +19,7 @@ import {
     calendar_header_controls
 } from './calendar.module.scss';
 
-const Calendar = ({ getDate }) => {
+const Calendar = ({ getDate, getMonth }) => {
     const [currentDate, setCurrentDate] = useState(moment().set('date', 1));
     const [daysOfMonth, setDaysOfMonth] = useState(null);
     const [daysOfTheWeek] = useState(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']);
@@ -37,8 +39,15 @@ const Calendar = ({ getDate }) => {
 
         let calendarMatrix = [];
 
+        const currDate = date.clone().set('date', 1);
+        const startDayClone = date.clone().set('date', 1);
+        const lasDayClone = date.clone().set('date', 1).add(1, 'month').subtract(1, 'days');
+
+
         let startDay = date.clone().set('date', 1);
         let lastDay = date.clone().set('date', 1).add(1, 'month').subtract(1, 'days');
+
+        getMonth(currDate);
 
         // Модифицируем результат getDay так, чтобы понедельник был = 0 вместо воскресенья = 0
         let startDow = (startDay.day() + 6) % 7;
@@ -50,12 +59,16 @@ const Calendar = ({ getDate }) => {
         // Если месяц не заканчивался в воскресенье, конец - следующее воскресенье следующего месяца
         lastDay.set('date', lastDay.get('date') + (6 - endDow));
 
-        getDate({ lastDay: lastDay.clone(), startDay: startDay.clone() });
+        getDate({ lastDay: startDayClone, startDay: lasDayClone });
+        const taskData = getters.GET_TASKS().filter(({ task_deadline }) => moment(task_deadline) >= startDayClone && moment(task_deadline) <= lasDayClone );
+
+        console.log(taskData);
 
         while (startDay <= lastDay) {
             calendarMatrix.push({
                 uuid: uuid(),
                 data: moment(startDay),
+                taskData: null,
                 today: moment().isSame(startDay, 'day'),
                 isWeekend: moment(startDay).day() === 6 || moment(startDay).day() === 0,
                 isPrevMonth: moment(date).set('month', date.get('month') - 1).get('month') === moment(startDay).get('month'),
@@ -80,7 +93,6 @@ const Calendar = ({ getDate }) => {
     const changeMonth = newDate => {
         setCurrentDate(newDate);
         setDaysOfMonth(getCalendarMatrix(newDate))
-
     };
 
     const renderCalendar = () => {
@@ -99,7 +111,6 @@ const Calendar = ({ getDate }) => {
     }
 
     useEffect(() => {
-        // eslint-disable-next-line
         setDaysOfMonth(getCalendarMatrix(currentDate));
     }, [currentDate])
 
@@ -108,7 +119,6 @@ const Calendar = ({ getDate }) => {
             <div className={calendar_header}>
                 <div className={calendar_header_controls}>
                     <Button onClick={prevMonth} icon={<LeftOutlined />}></Button>
-                    <div>{currentDate.format('MMMM YYYY')}</div>
                     <Button onClick={nextMonth} icon={<RightOutlined />}></Button>
                 </div>
             </div>
