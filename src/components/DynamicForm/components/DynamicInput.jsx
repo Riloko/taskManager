@@ -1,8 +1,10 @@
 import {useState} from 'react';
 import classNames from "classnames";
+import {CloseCircleOutlined} from "@ant-design/icons";
 
 import {
   component_input,
+  component_input_remover,
   component_input_active,
   component_input_error,
   component_input_label,
@@ -10,22 +12,22 @@ import {
   component_input_inner_errorMessage
 } from './dynamicComponents.module.scss';
 
-const DynamicInput = ({ onCleanError, onInputChange = () => {}, name, type = 'string', required = false, label, width = '100%', error }) => {
+
+const DynamicInput = ({ onCleanError, onInputChange = () => {}, name, type = 'string', required = false, label, width = '100%', error, fieldType = 'text' }) => {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState('');
   const [errorMessage] = useState('Это поле обязательно к заполению!');
 
-  const onInput = event => {
-    const {value} = event.target;
+  const onInput = value => {
     const regExp = /[\D\s]/gm;
 
     if (type === 'int') {
       setValue(value.replace(regExp, ''));
-      onInputChange(value.replace(regExp, ''));
+      onInputChange(value.replace(regExp, ''), name);
       return
     }
     setValue(value);
-    onInputChange(value);
+    onInputChange(value, name);
     error && onCleanError(name);
   };
 
@@ -41,13 +43,31 @@ const DynamicInput = ({ onCleanError, onInputChange = () => {}, name, type = 'st
         {label} {required && "*"}
       </div>
       <div className={component_input_inner}>
-        <input
-          value={value}
-          onFocus={() => setActive(true)}
-          onBlur={() => setActive(false)}
-          onInput={onInput}
-        />
+        { fieldType === 'textarea'
+          ? (
+            <textarea
+              value={value}
+              onFocus={() => setActive(true)}
+              onBlur={() => setActive(false)}
+              onInput={event => onInput(event.target.value)}
+              type={fieldType}
+            />
+          )
+          : (
+            <input
+              value={value}
+              onFocus={() => setActive(true)}
+              onBlur={() => setActive(false)}
+              onInput={event => onInput(event.target.value)}
+              type={fieldType}
+              placeholder={label}
+            />
+          )
+        }
         { error && <p className={component_input_inner_errorMessage}>{errorMessage}</p>}
+        {
+          value &&  <span onClick={() => onInput('')} className={component_input_remover}><CloseCircleOutlined /></span>
+        }
       </div>
     </div>
   )

@@ -1,6 +1,20 @@
 .component {
 
-  &_input {
+  &_datepicker {
+    &_inner {
+      &_picker {
+        width: 100%;
+        padding: 16px 36px 16px 12px !important;
+        border: 1px solid #949494  !important;
+        box-shadow: none !important;
+        &:hover {
+          border: 1px solid #949494;
+        }
+      }
+    }
+  }
+  &_select,
+  &_datepicker {
     max-height: 79px;
     &_label {
       margin-bottom: 6px;
@@ -8,10 +22,46 @@
       line-height: 17px;
     }
     &_inner {
+      width: 100%;
+    }
+  }
+  &_select .ant-select-selector {
+    padding: 16px 36px 16px 12px;
+  }
+  &_input {
+    max-height: 79px;
+    position: relative;
+    &_remover {
+      position: absolute;
+      top: 40px;
+      right: 10px;
+      cursor: pointer;
+      color: #00000040;
+      transition: .3s;
+      &:hover {
+        color: #00000073;
+      }
+    }
+    &_label {
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &_inner {
       display: block;
-      & input {
+      & input{
         width: 100%;
         padding: 16px 36px 16px 12px;
+        outline: none;
+        background: #FFFFFF;
+        border: 1px solid #949494;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+      & textarea {
+        resize: none;
+        width: 100%;
+        padding: 5px 36px 5px 12px;
         outline: none;
         background: #FFFFFF;
         border: 1px solid #949494;
@@ -26,27 +76,51 @@
       }
     }
   }
-  &_input_active {
-    & .component_input_label {
+  &_input_active,
+  &_select_active,
+  &_datepicker_active {
+    & .component_input_label,
+    & .component_select_label,
+    & .component_datepicker_label {
       color: #543FD3;
     }
     & .component_input_inner {
-      & input {
+      & input,
+      & textarea{
         border: 1px solid #543FD3;
       }
     }
   }
-  &_input_error {
-    & .component_input_label {
+  &_input_error,
+  &_select_error,
+  &_datepicker_error {
+    & .component_input_label,
+    & .component_select_label,
+    & .component_datepicker_label {
       color: #EE0004;
     }
     & .component_input_inner {
-      & input {
+      & input,
+      & textarea {
         color: #EE0004;
         border: 1px solid #EE0004;
       }
       &_errorMessage {
         color: #EE0004;
+      }
+    }
+  }
+  &_datepicker_active {
+    & .component_datepicker_inner {
+      &_picker {
+        border: 1px solid #543FD3 !important;
+      }
+    }
+  }
+  &_datepicker_error {
+    & .component_datepicker_inner {
+      &_picker {
+        border: 1px solid #EE0004 !important;
       }
     }
   }

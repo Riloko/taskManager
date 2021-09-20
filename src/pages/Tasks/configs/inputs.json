@@ -5,7 +5,8 @@
     "name": "task_title",
     "required": true,
     "type": "string",
-    "width": "48%"
+    "width": "48%",
+    "fieldType": "text"
   },
   {
     "component": "textarea",
@@ -13,23 +14,25 @@
     "name": "task_description",
     "required": false,
     "type": "string",
-    "width": "50%"
+    "width": "48%",
+    "fieldType": "text"
   },
   {
-    "component": "selector",
+    "component": "select",
     "label": "Ответственный",
     "name": "staff_id",
     "required": false,
     "type": "string",
-    "width": "50%"
+    "width": "48%",
+    "entity": "staff"
   },
   {
     "component": "datepicker",
     "label": "Крайний срок",
     "name": "task_deadline",
-    "required": false,
+    "required": true,
     "type": "datetime",
-    "width": "50%"
+    "width": "48%"
   },
   {
     "component": "input",
@@ -37,14 +40,16 @@
     "name": "task_my_prediction",
     "required": false,
     "type": "int",
-    "width": "48%"
+    "width": "48%",
+    "fieldType": "text"
   },
   {
-    "component": "selector",
+    "component": "select",
     "label": "Тип дела",
     "name": "task_type",
     "required": true,
     "type": "string",
-    "width": "50%"
+    "width": "48%",
+    "entity": "types"
   }
 ]

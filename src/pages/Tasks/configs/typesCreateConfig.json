@@ -1,0 +1,30 @@
+[
+  {
+    "component": "input",
+    "label": "Название",
+    "name": "type_name",
+    "required": true,
+    "type": "string",
+    "width": "100%",
+    "fieldType": "text"
+  },
+  {
+    "component": "select",
+    "label": "Цвет дела",
+    "name": "type_color",
+    "required": true,
+    "type": "string",
+    "width": "100%",
+    "entity": "color"
+  },
+  {
+    "component": "select",
+    "label": "Иконка",
+    "name": "type_icon",
+    "required": false,
+    "type": "string",
+    "width": "100%",
+    "entity": "icon"
+  }
+]
+

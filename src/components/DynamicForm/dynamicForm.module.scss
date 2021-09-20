@@ -5,6 +5,9 @@
   &_header {
     height: 60px;
     width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+
   }
   &_body {
     height: calc(100% - 120px);
@@ -16,5 +19,10 @@
   &_footer {
     height: 60px;
     width: 100%;
+    display: flex;
+    align-items: flex-end;
+    & button:first-child {
+      margin-right: 15px;
+    }
   }
 }
