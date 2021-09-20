@@ -49,7 +49,7 @@ const typesLayout = {
 const TasksDashboard = ({ dateRange, currentMonth }) => {
 
 	const [entity, setEntity] = useState('tasks');
-	const [currentType, setCurrentType] = useState("850e1873-5fc2-507b-a8ca-ed83c5f77dfe");
+	const [currentType, setCurrentType] = useState(state['types'].length ? state['types'][0].types_id : '');
 	const [active, setActive] = useState(false);
 	const [key, setKey] = useState(1361234);
 	const [config, setConfig] = useState([]);
@@ -85,14 +85,14 @@ const TasksDashboard = ({ dateRange, currentMonth }) => {
 				</p>
 				<div className={tasks_dashboard_header_buttons}>
 					{
-						getters.GET_TYPES().map(type => <TypeItem typeData={type} activeType={currentType} changeType={changeType} />)
+						getters.GET_TYPES().map(type => <TypeItem typeData={type} activeType={currentType} changeType={changeType} key={type.types_id}/>)
 					}
-					{/*<Button onClick={() => toggleModal(true, typesCreateConfig, typesLayout, 'types')} icon={<PlusCircleOutlined />} type="primary">Добавить раздел</Button>*/}
+					{/*<Button onClick={() => toggleModal(true, typesCreateConfig, typesLayout, 'types')} icon={<PlusOutlined />} type="primary">Добавить раздел</Button>*/}
 				</div>
 			</div>
 			<div className={tasks_dashboard_body}>
 				{
-					getters.GET_TASKS(currentType).map(task => <TaskItem taskData={task} key={task.task_id}/>)
+					getters.GET_TASKS(currentType, dateRange).map(task => <TaskItem taskData={task} key={task.task_id}/>)
 				}
 			</div>
 			<Modal

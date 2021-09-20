@@ -35,15 +35,19 @@ const TaskItem = ({ taskData }) => {
 			<div className={tasks_item_body}>
 				<div className={tasks_item_body_description}>{taskData.task_description}</div>
 				<div className={tasks_item_body_data}>
-					<div className={tasks_item_body_data_staff}>
-						<div className={tasks_item_body_data_staff_avatar}>
-							<img src={taskData.task_staff.staff_avatar} alt={taskData.task_staff.staff_name} />
-						</div>
-						<div className={tasks_item_body_data_staff_info}>
-							<div className={tasks_item_body_data_staff_info_name}>{taskData.task_staff.staff_name}</div>
-							<div className={tasks_item_body_data_staff_info_skills}>{taskData.task_staff.staff_skills}</div>
-						</div>
-					</div>
+					{
+						taskData.task_staff ? (
+							<div className={tasks_item_body_data_staff}>
+								<div className={tasks_item_body_data_staff_avatar}>
+									<img src={taskData.task_staff.staff_avatar} alt={taskData.task_staff.staff_name} />
+								</div>
+								<div className={tasks_item_body_data_staff_info}>
+									<div className={tasks_item_body_data_staff_info_name}>{taskData.task_staff.staff_name}</div>
+									<div className={tasks_item_body_data_staff_info_skills}>{taskData.task_staff.staff_skills}</div>
+								</div>
+							</div>
+						) : <p>Нет сотрудника</p>
+					}
 					{ taskData.task_my_prediction ? <div className={tasks_item_body_data_myPrediction}>Оценка: {taskData.task_my_prediction} ч.</div> : null }
 				</div>
 			</div>

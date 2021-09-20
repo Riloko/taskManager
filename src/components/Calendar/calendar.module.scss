@@ -62,6 +62,24 @@
                 &_header {
                     display: flex;
                 }
+                &_body {
+                    display: flex;
+                    justify-content: flex-end;
+                    &_icons {
+                        display: flex;
+                        flex-direction: column;
+                        &_icon {
+                            display: flex;
+                            padding: 3px;
+                            border-radius: 25px;
+                            font-size: 10px;
+                            line-height: 14px;
+                            & img {
+                                margin-right: 3px;
+                            }
+                        }
+                    }
+                }
             }
         }
         &_button_lastMonth,

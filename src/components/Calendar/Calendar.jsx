@@ -40,8 +40,6 @@ const Calendar = ({ getDate, getMonth }) => {
         let calendarMatrix = [];
 
         const currDate = date.clone().set('date', 1);
-        const startDayClone = date.clone().set('date', 1);
-        const lasDayClone = date.clone().set('date', 1).add(1, 'month').subtract(1, 'days');
 
 
         let startDay = date.clone().set('date', 1);
@@ -59,16 +57,14 @@ const Calendar = ({ getDate, getMonth }) => {
         // Если месяц не заканчивался в воскресенье, конец - следующее воскресенье следующего месяца
         lastDay.set('date', lastDay.get('date') + (6 - endDow));
 
-        getDate({ lastDay: startDayClone, startDay: lasDayClone });
-        const taskData = getters.GET_TASKS().filter(({ task_deadline }) => moment(task_deadline) >= startDayClone && moment(task_deadline) <= lasDayClone );
-
-        console.log(taskData);
+        getDate({ lastDay: lastDay.clone(), startDay: startDay.clone() });
+        const taskData = getters.GET_TASKS(null, { lastDay: lastDay.clone(), startDay: startDay.clone() });
 
         while (startDay <= lastDay) {
             calendarMatrix.push({
                 uuid: uuid(),
                 data: moment(startDay),
-                taskData: null,
+                taskData: taskData.filter(({ task_deadline }) => moment(task_deadline).isSame(startDay, 'day')),
                 today: moment().isSame(startDay, 'day'),
                 isWeekend: moment(startDay).day() === 6 || moment(startDay).day() === 0,
                 isPrevMonth: moment(date).set('month', date.get('month') - 1).get('month') === moment(startDay).get('month'),

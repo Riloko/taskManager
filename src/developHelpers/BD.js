@@ -1,6 +1,7 @@
 import {getData, setData} from "./helpers";
 
 import { generateUUID } from "../utils";
+import moment from "moment";
 
 const state = {
 	staff: getData('staff') ? getData('staff') : [],
@@ -47,7 +48,7 @@ const state = {
 		},
 		{
 			color_id: "bf585e23-e8bf-5281-bbf6-65e5f1e92430",
-			color_name: "#E25618"
+			color_name: "#e25618"
 		}
 	],
 	icon: [
@@ -137,8 +138,10 @@ const state = {
 };
 
 const getters = {
-	"GET_TASKS": function (types_id) {
-		const filteredTasks = types_id ? state['tasks'].filter(({ task_type }) => task_type === types_id) : state['tasks'];
+	"GET_TASKS": function (types_id, dateRange) {
+		if (!dateRange) return []
+
+		const filteredTasks = types_id ? state['tasks'].filter(({ task_type }) => task_type === types_id).filter(({ task_deadline }) => moment(task_deadline).isBetween(dateRange.startDay, dateRange.lastDay)) : state['tasks'].filter(({ task_deadline }) => moment(task_deadline).isBetween(dateRange.startDay, dateRange.lastDay));
 		return filteredTasks.map(task => {
 			const type = state['types'].find(type => task.task_type === type.types_id);
 
