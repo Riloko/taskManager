@@ -81,13 +81,17 @@ const TasksDashboard = ({ dateRange, currentMonth }) => {
 			<div className={tasks_dashboard_header}>
 				<p className={tasks_dashboard_header_text}>
 					{currentMonth ? currentMonth.format('MMMM YYYY') : ''}
-					<Button onClick={() => toggleModal(true, inputs, tasksLayout, 'tasks')} icon={<PlusOutlined />} type="primary" title="Создать новое дело"></Button>
+					<div>
+						<Button style={{marginRight: 5}} onClick={() => toggleModal(true, typesCreateConfig, typesLayout, 'types')} icon={<PlusOutlined />} type="primary" danger>Раздел</Button>
+						<Button onClick={() => toggleModal(true, inputs, tasksLayout, 'tasks')} icon={<PlusOutlined />} type="primary" title="Создать новое дело">Дело</Button>
+					</div>
+
 				</p>
 				<div className={tasks_dashboard_header_buttons}>
 					{
 						getters.GET_TYPES().map(type => <TypeItem typeData={type} activeType={currentType} changeType={changeType} key={type.types_id}/>)
 					}
-					{/*<Button onClick={() => toggleModal(true, typesCreateConfig, typesLayout, 'types')} icon={<PlusOutlined />} type="primary">Добавить раздел</Button>*/}
+					{/**/}
 				</div>
 			</div>
 			<div className={tasks_dashboard_body}>
